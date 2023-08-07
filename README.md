@@ -1,3 +1,6 @@
+A testing App
+1. formatting text using rich text editor
+2. formatting using markdown
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
