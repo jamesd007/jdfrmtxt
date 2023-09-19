@@ -1,0 +1,13 @@
+.button_login {
+  height: fit-content;
+  width: 7rem;
+  border: solid 1px darkcyan;
+  /* border: solid 1px rgba(62, 62, 62, 0.8); */
+  border-radius: 0.4rem;
+  font-size: 1.2rem;
+  background-color: lightcyan;
+  /* background-color: rgba(255, 165, 0, 0.5); */
+  margin-right: 0.5rem;
+  box-shadow: 2px 3px 0px 0px rgba(0, 139, 139, 0.2);
+  /* box-shadow: 2px 3px 0px 0px rgba(62, 62, 62, 0.2); */
+}

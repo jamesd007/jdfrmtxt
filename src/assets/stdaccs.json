@@ -1,0 +1,191 @@
+[
+  {
+    "number": "101",
+    "name": "Bank",
+    "class": "asset",
+    "category": "bank",
+    "stdAmt": 0
+  },
+  {
+    "number": "102",
+    "name": "Petty Cash",
+    "class": "asset",
+    "category": "pettyCash",
+    "stdAmt": 0
+  },
+  {
+    "number": "103",
+    "name": "Accounts Receiveable",
+    "class": "asset",
+    "category": "accountsReceiveable",
+    "stdAmt": 0
+  },
+  {
+    "number": "201",
+    "name": "Levies",
+    "class": "income",
+    "category": "levies",
+    "stdAmt": 0
+  },
+  {
+    "number": "202",
+    "name": "Rental Income",
+    "class": "income",
+    "category": "rentalIncome",
+    "stdAmt": 0
+  },
+  {
+    "number": "203",
+    "name": "Interest Income",
+    "class": "income",
+    "category": "interestIncome",
+    "stdAmt": 0
+  },
+  {
+    "number": "204",
+    "name": "Miscellaneous Income",
+    "class": "income",
+    "category": "miscellaneousIncome",
+    "stdAmt": 0
+  },
+  {
+    "number": "301",
+    "name": "Accounts Payable",
+    "class": "liability",
+    "category": "accountsPayable",
+    "stdAmt": 0
+  },
+  {
+    "number": "401",
+    "name": "Accounting Fees",
+    "class": "expense",
+    "category": "accountingFees",
+    "stdAmt": 0
+  },
+  {
+    "number": "402",
+    "name": "Administration",
+    "class": "expense",
+    "category": "administration",
+    "stdAmt": 0
+  },
+  {
+    "number": "403",
+    "name": "Bank Charges",
+    "class": "expense",
+    "category": "bankCharges",
+    "stdAmt": 0
+  },
+  {
+    "number": "404",
+    "name": "Depreciation",
+    "class": "expense",
+    "category": "depreciation",
+    "stdAmt": 0
+  },
+  {
+    "number": "405",
+    "name": "Entertainment",
+    "class": "expense",
+    "category": "entertainment",
+    "stdAmt": 0
+  },
+  {
+    "number": "406",
+    "name": "Gifts",
+    "class": "expense",
+    "category": "gifts",
+    "stdAmt": 0
+  },
+  {
+    "number": "407",
+    "name": "Insurances",
+    "class": "expense",
+    "category": "insurances",
+    "stdAmt": 0
+  },
+  {
+    "number": "408",
+    "name": "Interest Expense",
+    "class": "expense",
+    "category": "interestExpense",
+    "stdAmt": 0
+  },
+  {
+    "number": "409",
+    "name": "Landscaping and gardens",
+    "class": "expense",
+    "category": "landscapingAndGardens",
+    "stdAmt": 0
+  },
+  {
+    "number": "410",
+    "name": "Legal Fees",
+    "class": "expense",
+    "category": "legalFees",
+    "stdAmt": 0
+  },
+  {
+    "number": "411",
+    "name": "Licences",
+    "class": "expense",
+    "category": "licences",
+    "stdAmt": 0
+  },
+  {
+    "number": "412",
+    "name": "Maintenance",
+    "class": "expense",
+    "category": "maintenance",
+    "stdAmt": 0
+  },
+  {
+    "number": "413",
+    "name": "Management Fees",
+    "class": "expense",
+    "category": "managementFees",
+    "stdAmt": 0
+  },
+  {
+    "number": "414",
+    "name": "Rates and Taxes",
+    "class": "expense",
+    "category": "ratesAndTaxes",
+    "stdAmt": 0
+  },
+  {
+    "number": "415",
+    "name": "Rent",
+    "class": "expense",
+    "category": "rent",
+    "stdAmt": 0
+  },
+  {
+    "number": "416",
+    "name": "Salaries and Wages",
+    "class": "expense",
+    "category": "salariesAndWages",
+    "stdAmt": 0
+  },
+  {
+    "number": "417",
+    "name": "Security",
+    "class": "expense",
+    "category": "security",
+    "stdAmt": 0
+  },
+  {
+    "number": "418",
+    "name": "Stationery and printing",
+    "class": "expense",
+    "category": "stationeryAndPrinting",
+    "stdAmt": 0
+  },
+  {
+    "number": "419",
+    "name": "Utilities",
+    "class": "expense",
+    "category": "utilities",
+    "stdAmt": 0
+  }
+]

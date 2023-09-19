@@ -1,0 +1,10 @@
+.company_label {
+  width: 12rem;
+  text-align: right;
+  margin-right: 0.5rem;
+}
+
+.company_form_line {
+  display: flex;
+  flex-direction: row;
+}

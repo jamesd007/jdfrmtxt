@@ -1,0 +1,38 @@
+/* Example CSS for basic styling */
+.checkbox-table {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  overflow: auto;
+}
+
+.checkbox-row {
+  display: grid;
+  grid-template-columns: 2rem 2.5rem 2.5rem 10rem 10rem 8rem 8rem;
+  font-size: 1.1rem;
+  justify-items: start;
+  /* overflow: hidden; */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.ellipsis {
+  flex: 1; /* Allow the ellipsis element to expand and take available space */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.ellipsis_right {
+  flex: 1; /* Allow the ellipsis element to expand and take available space */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+.checkbox-row input {
+  margin-right: 10px;
+}
