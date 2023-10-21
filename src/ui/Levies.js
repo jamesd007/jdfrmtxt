@@ -431,8 +431,8 @@ const Levies = (props) => {
                 checkboxData={props.levyAccs} />
             {/* </div> */}
             <div className='container_levies'>
-                <div className='button_grid_secondary'
-                    style={{ gridTemplateColumns: "repeat(5, 7rem)" }}>
+                <div className='button_grid_secondary'>
+                    {/* style={{ gridTemplateColumns: "repeat(5, 7rem)" }} */}
                     <button
                         className='secondary_buttons'
                         onClick={handleSetRateAll}>

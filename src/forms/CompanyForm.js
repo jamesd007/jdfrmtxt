@@ -50,14 +50,14 @@ const CompanyForm = (props) => {
 
                 if (updated) {
                     window.alert(`Successfully created company and updated user database`)
-                    // props.success({ status: "success", lastCo: companyId });
-                    currentCompany(companyId)
+                    props.success({ status: "success", lastCo: companyId });
+                    currentCompanyChange(companyId)
                 } else {
                     window.alert(`User with user_id ${props.user.id} not found.`)
                 }
             } catch (error) {
                 console.error('ERROR creating company or updating last_company:', error);
-                // props.success({ status: "error" + error, lastCo: '' });
+                props.success({ status: "error" + error, lastCo: '' });
                 alert('Company create - failed');
             }
         };

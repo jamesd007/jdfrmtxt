@@ -1,33 +1,77 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import accountsData from '../assets/stdaccs.json';
-import "../App.css"
+import "../styles/checkbox.css"
 
-function AccountingSystem() {
+function AccountingSystem(props) {
     const [accounts] = useState(accountsData);
+const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+
+const handleCheckboxChange = (event, id) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+    setSelectedCheckboxes(prevState => [...prevState, id]);
+    } else {
+    setSelectedCheckboxes(prevState =>
+    prevState.filter(item => item !== id)
+    );
+    }
+};
+    
+const handleSelectAll = () => {
+    if (selectedCheckboxes.length === accountsData.length) {
+    setSelectedCheckboxes([])
+    }
+    else {
+    setSelectedCheckboxes(accounts.map((item) => item.id));
+    }
+};
+
+useEffect(() => {
+    let selectedAccounts=[]
+    for (let i=0;i<selectedCheckboxes?.length;i++)
+    selectedAccounts.push(accounts[i])
+    props.checkAccs(selectedAccounts)
+}, [selectedCheckboxes])
 
     return (
         <div className="table-container">
             <table>
                 <thead>
-                    <tr>
+                    <tr className='header-row'>
+                        <th></th>
                         <th>Number</th>
                         <th>Account Name</th>
                         <th>Class</th>
                         <th>Category</th>
-                        <th>Standard Amount</th>
+                        <th
+                        className='tooltip'
+                        data-tooltip="Tooltip for Standard Amount">Std Amt</th>
                     </tr>
                 </thead>
-                <tbody className="table-body">
-                    {accounts.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.number}</td>
-                            <td>{item.name}</td>
-                            <td>{item.class}</td>
-                            <td>{item.category}</td>
-                            <td>{item.stdAmt}</td>
-                        </tr>
-                    ))}
-                </tbody>
+                 <label
+                    className="checkbox-row">
+                    <input
+                        type="checkbox"
+                        checked={selectedCheckboxes.length === accounts.length}
+                        onChange={handleSelectAll}
+                    />
+                        Select All
+                    </label>
+                    <tbody >
+                        {accounts.map(item => (
+                            < div key={item.id} className="checkbox-row">
+                                <input 
+                                    type="checkbox"
+                                    checked={selectedCheckboxes.includes(item.id)}
+                                    onChange={e => handleCheckboxChange(e, item.id)} />
+                                    <span className="ellipsis">{item.number}</span>
+                                    <span className="ellipsis">{item.name}</span>
+                                    <span className="ellipsis">{item.class}</span>
+                                    <span className="ellipsis">{item.category}</span>
+                                    <span className="ellipsis_right">{item.stdAmt}</span>
+                            </div>
+                        ))}
+                    </tbody>
             </table>
         </div>
         // <div>
@@ -39,43 +83,6 @@ function AccountingSystem() {
         //     and your existing account will remian.
         //     A list of conflicts will show on screen.
         //   </p>
-        //   <div className="grid-container"
-        //     style={{
-        //       gridTemplateColumns: "5rem 14rem 7rem 10rem 5rem"
-        //     }}>
-        //     <div className="grid-header">Number</div>
-        //     <div className="grid-header">Account name</div>
-        //     <div className="grid-header">Class</div>
-        //     <div className="grid-header">Category</div>
-        //     <div className="grid-header">Standard amount</div>
-        //     <div>
-        //       {accounts.map(account => (
-        //         <div key={account.number}
-        //           className="grid-container"
-        //           style={{
-        //             gridTemplateColumns: "5rem 14rem 7rem 10rem 5rem"
-        //           }}
-        //         >
-        //           <div className='transaction_row_left'
-        //             style={{ width: "fit-content" }}
-        //           >{account.number}</div>
-        //           <div
-        //             className='transaction_row_left'
-        //             style={{ width: "fit-content" }}>{account.name}</div>
-        //           <div
-        //             className='transaction_row_left'
-        //             style={{ width: "fit-content" }}>{account.class}</div>
-        //           <div
-        //             className='transaction_row_left'
-        //             style={{ width: "fit-content" }}>{account.category}</div>
-        //           <div
-        //             className='transaction_row_left'
-        //             style={{ width: "fit-content" }}>{account.stdAmt}</div>
-        //         </div>
-        //       ))}
-        //     </div>
-        //   </div>
-        // </div>
     );
 }
 

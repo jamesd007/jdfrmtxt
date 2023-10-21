@@ -19,7 +19,7 @@
 
 .button_grid {
   display: grid;
-  grid-template-columns: repeat(8, 8.2rem);
+  grid-template-columns: repeat(4, 8.2rem);
   gap: 5px;
   margin-left: 50%;
   transform: translate(-50%);
@@ -141,4 +141,16 @@
   gap: 0.8rem;
   margin-left: 50%;
   transform: translate(-50%);
+}
+
+@media (max-width: 1000px) {
+  .button_grid {
+    grid-template-columns: repeat(4, 8.2rem);
+  }
+}
+
+@media (min-width: 1001px) {
+  .button_grid {
+    grid-template-columns: repeat(6, 8.2rem);
+  }
 }

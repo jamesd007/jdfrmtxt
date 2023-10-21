@@ -53,27 +53,12 @@ const CustomerMaint = (props) => {
         setCustomerEdit(false)
     }
 
-    const containerStyle = {
-        gridTemplateColumns: "repeat(6, 8.2rem)",
-        '@media (maxWidth: 1100px)': {
-            gridTemplateColumns: "repeat(4, 8.2rem)",
-            backgroundColor: "red"
-        },
-    };
-
     return (
         <div
             className='work_container'
             style={{
-                // height: "100%",
-                // width: "100%",
                 backgroundColor: "lightgray"
             }}>
-            {/* style={{
-                height: "100%",
-                width: "100%",
-                backgroundColor: "lightgray"
-            }}> */}
             {(customerCreate || customerEdit) && (
                 <Modals
                     title={(props.edit && checkedAccs && allCustomers[checkedAccs[0] - 1]) ? "Edit Customer" : "Create Customer"}
@@ -99,13 +84,14 @@ const CustomerMaint = (props) => {
                 }}>
                     Customer Maintenance</h2>
             </div>
-            {allCustomers &&
-                <CheckboxTable
+            {allCustomers?.length>0
+            ? <CheckboxTable
                     checkAccs={(chkdArr) => setCheckedAccs(chkdArr)}
-                    checkboxData={allCustomers} />}
+                    checkboxData={allCustomers} />
+                :<p>No records found</p>
+                }
             <div className='container'>
-                <div className='button_grid'
-                    style={containerStyle}>
+                <div className='button_grid'>
                     <button
                         className='main_buttons'
                         onClick={handleCreate}>
@@ -131,7 +117,7 @@ const CustomerMaint = (props) => {
                     </button>
                     <button
                         className='main_buttons'
-                        disabled={underConstruction}
+                        disabled={allCustomers?.length>0}
                         onClick={handleImport}>
                         <FaFileImport
                             size={24} />

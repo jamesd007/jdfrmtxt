@@ -278,6 +278,7 @@
   z-index: 999;
   background: transparent;
   animation: fadein 0.2s linear forwards;
+  width:100%
 }
 
 .modal-content-new {
@@ -289,13 +290,14 @@
   z-index: 999;
   border: 0.06rem solid darkcyan;
   border-radius: 1rem;
-  max-width: 90%;
+  max-width: 95%;
   color: var(--modal_text_color);
   box-shadow: 2px 2px 8px 2px rgb(165, 164, 164);
   transition: all 500ms ease-in-out;
   overflow: hidden;
   max-height: 90vh;
   min-height: 10vh;
+  width:auto;
 }
 
 .modal-header-new {
@@ -347,7 +349,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 0.5rem;
-  /* overflow: auto; */
+  overflow: hidden;
   scroll-behavior: smooth;
   max-height: 48vh;
   max-width: 95%;

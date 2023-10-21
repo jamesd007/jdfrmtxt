@@ -4,12 +4,16 @@ import CompanyForm from '../forms/CompanyForm'
 import db from '../store/dexie'
 import MainProgram from './MainProgram'
 import { useCompany, useCompanyUpdate, useCurrentUser, useCurrentUserUpdate } from '../contexts/CompanyContext'
+import {FiLogOut}from 'react-icons/fi'
 import { TiThMenu } from 'react-icons/ti'
 import NutsofSetup from '../utils/NutsOfSetup'
 import CSVImport from './CSVImport'
+import SlideInMenu from '../menus/SlideInMenu'
+import CheckboxTable from '../utils/CheckboxTable';
+import {  getAllAccounts } from '../store/dexie';
+
 
 const Company = (props) => {
-    console.log("tedtestZ opened company")
     const [dispCoForm, setDispCoForm] = useState(false)
     const [updateCoDB, setUpdateCoDB] = useState(false)
     const [loadButtons, setLoadButtons] = useState(false)
@@ -23,15 +27,34 @@ const Company = (props) => {
     const [companyName, setCompanyName] = useState('')
     const [stdAccs, setStdAccs] = useState(false)
     const [csvImport, setCsvImport] = useState(false)
+    const [open,setOpen]=useState(false)
+    const [coords, setCoords] = useState({ x: 0, y: 0 });
+    const [showImports,setShowImports]=useState(false)
+    const [checkedAccs, setCheckedAccs] = useState([])
+const[accountsArray,setAccountsArray]=useState([])
 
     const handleLogInOut = () => {
         changeCompanyId("")
         changeUser("")
         setLoadButtons(false)
         setLoggedIn(false)
-        console.log("tedtestZ handleLoginLogout logging in out")
         props.loggingOut()
     }
+
+    const menuItems = [
+        {
+        leftIcon:<FiLogOut />,
+        text:"Logout",
+        callback:handleLogInOut,
+        permissionLevels: ["anybody"],
+goToMenu: "",
+        }
+    ]
+
+    const handleOpen = (e) => {
+        setOpen(!open);
+        setCoords({ x: e.clientX, y: e.clientY });
+    };
 
     async function getCompanyNameById(companyId) {
         try {
@@ -51,7 +74,6 @@ const Company = (props) => {
         getCompanyNameById(companyId)
             .then(companyName => {
                 setCompanyName(companyName)
-                console.log('tedtestZ Company Name:', companyName);
             })
             .catch(error => {
                 console.error(error);
@@ -59,23 +81,26 @@ const Company = (props) => {
     }, [companyId])
 
     useEffect(() => {
+        console.log("tedtest start ue")
         if (loggedIn) {
             const getLastCo = async () => {
                 try {
                     const lastCo = await db.companies.get(companyId);
+                    console.log("tedtest lastco=",lastCo)
                     if (lastCo) {
                         setLoadButtons(true)
                         db.accounts.count().then(count => {
+                            console.log("tedtest count=",count)
                             if (count === 0) {
                                 setAccsPresent(false)
                             } else {
                                 setAccsPresent(true)
-                                console.log(`tedtestQ The "accounts" table contains ${count} records.`);
                             }
                         }).catch(error => {
                             console.error('Error checking the "accounts" table:', error);
                         });
                     } else {
+                        console.log("tedtest wasn't lastco")
                         console.log('ERROR loading last company');
                     }
                 } catch (error) {
@@ -96,6 +121,11 @@ const Company = (props) => {
 
     const handleCloseModal = () => {
         setDispCoForm(false)
+    }
+
+    const handleCloseStdAccs=()=>{
+        setStdAccs(false)
+        setAccsPresent(false)
     }
 
     const handleCloseLoadModal = () => {
@@ -120,10 +150,18 @@ const Company = (props) => {
 
     const handleStdAccs = () => {
         setStdAccs(true)
+        setAccsPresent(true)
     }
 
     const handleCSV = () => {
         setCsvImport(true)
+    }
+
+    const handleImports=(accountsData)=>{
+        setAccountsArray(accountsData)
+        setCsvImport(false)
+        setAccsPresent(true)
+        setShowImports(true)
     }
 
     return (
@@ -135,11 +173,24 @@ const Company = (props) => {
                     top: "5px",
                     color: "gray"
                 }}
-                onClick={handleLogInOut}
+                onClick={handleOpen}
             >
                 <TiThMenu
                     size={32} />
             </span>
+            {open && 
+<SlideInMenu
+//TODO set roles and persmissions hierarchy
+roles={'anybody'}
+menuItems={menuItems}
+// secMenuItems={secMenuItems}
+mainscreen={false}
+onClose={() => setOpen(false)}
+coords={coords}
+>
+</SlideInMenu>
+
+}
             {dispCoForm &&
                 <Modals
                     title={"Create Company"}
@@ -220,8 +271,14 @@ const Company = (props) => {
                         <br />
                         <span
                             style={{ textAlign: "left", marginLeft: "1rem" }}>
-                            {'\u2022'} Import a set of accounts in csv format
+                            {'\u2022'} Import a set of accounts in csv format, or
                         </span>
+                        <br/>
+                        <span
+                            style={{ textAlign: "left", marginLeft: "1rem" }}>
+                            {'\u2022'} Create Accounts later in Accounts module 
+                        </span>
+                        <button>close this modal permanently</button>
                     </div>
                 </Modals>}
             {loadButtons &&
@@ -235,11 +292,36 @@ const Company = (props) => {
                 // : lastCompany} 
                 />}
             {stdAccs && <NutsofSetup
-                close={() => setStdAccs(false)} />
+                close={() => handleCloseStdAccs()} />
             }
             {csvImport && <CSVImport
+            importedAccs={(accsData)=>handleImports(accsData)}
                 close={() => setCsvImport(false)} />
             }
+            {showImports &&
+        <div
+        className='work_container'
+        style={{
+            backgroundColor: "lightgray"
+        }}>
+             <div
+                style={{ height: "100&" }}>
+                <h2 style={{
+                    textAlign: "left",
+                    marginLeft: "1rem",
+                    marginTop: "0px"
+                }}>
+                    Import</h2>
+                    <CheckboxTable
+                checkAccs={(chkdArr) => setCheckedAccs(chkdArr)}
+                checkboxData={accountsArray}/>
+                <h4>Check accounts to be imported and click import</h4>
+                <button>Import</button>
+                <button onClick={()=>setShowImports(false)}>cancel</button>
+                </div>
+                </div>
+                // : <p>No records found</p>
+        } 
         </div>
     )
 }

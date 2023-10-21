@@ -5,7 +5,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { useCompany, useCompanyUpdate, useCurrentUser, useCurrentUserUpdate } from '../contexts/CompanyContext'
 
 function LoginForm(props) {
-  console.log("tedtestZ loginform props=", props)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
@@ -69,17 +68,9 @@ function LoginForm(props) {
   };
 
   const handleSubmit = async (event) => {
-    console.log("tedtestZZZZZZZ handlesubmit event=", event)
     event.preventDefault();
-    console.log("tedtestZZZZZZZ handlesubmit")
     // Fetch user data from Dexie
     const user = await db.users.get(username);
-
-    if (user && verifyPassword(password, user.hashedPassword)) {
-      console.log('TEDTESTZ Login successful');
-    } else {
-      console.log('TEDTESTZ Invalid credentials');
-    }
   };
 
   const verifyPassword = (password, hashedPassword) => {

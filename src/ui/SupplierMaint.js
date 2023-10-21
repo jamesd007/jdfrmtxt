@@ -102,8 +102,8 @@ const SupplierMaint = (props) => {
                     checkAccs={(chkdArr) => setCheckedAccs(chkdArr)}
                     checkboxData={allSuppliers} />}
             <div className='container'>
-                <div className='button_grid'
-                    style={containerStyle}>
+                <div className='button_grid'>
+                    {/* style={containerStyle} */}
                     <button
                         className='main_buttons'
                         onClick={handleCreate}>

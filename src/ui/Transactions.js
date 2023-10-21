@@ -153,8 +153,8 @@ const Transactions = (props) => {
             {/* checkAccs={(chkdArr) => setCheckedAccs(chkdArr)} */}
             {/* checkboxData={levyAccs} />} */}
             <div className='container'>
-                <div className='button_grid'
-                    style={{ gridTemplateColumns: "repeat(5, 120px)" }}>
+                <div className='button_grid'>
+                    {/* style={{ gridTemplateColumns: "repeat(5, 120px)" }} */}
 
                     <button
                         className='main_buttons'

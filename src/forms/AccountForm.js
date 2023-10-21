@@ -105,17 +105,17 @@ const AccountForm = (props) => {
     const handleOnSearch = (string, results) => {
         // onSearch will have as the first callback parameter
         // the string searched and for the second the results.
-        console.log("tedtestTT string,results=", string, results)
+        // console.log("tedtestTT string,results=", string, results)
     }
 
     const handleOnHover = (result) => {
         // the item hovered
-        console.log("tedtestTT resulkt=", result)
+        // console.log("tedtestTT resulkt=", result)
     }
 
     const handleOnSelect = (item) => {
         // the item selected
-        console.log("tedtestTT item=", item)
+        // console.log("tedtestTT item=", item)
     }
 
     const handleOnFocus = () => {
@@ -347,7 +347,7 @@ onChange={handleChange}
                 <div className='button_grid'
                     style={{
                         marginTop: "1rem",
-                        gridTemplateColumns: "repeat(2,8rem)"
+                        // gridTemplateColumns: "repeat(2,8rem)"
                     }}>
                     <button
                         className="form_buttons"

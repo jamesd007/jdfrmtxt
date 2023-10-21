@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import '../styles/mainprogram.css'
+import {AiOutlineImport} from 'react-icons/ai'
 import { RiArrowGoBackFill } from 'react-icons/ri'
 import { MdBusiness, MdAccountBalanceWallet, MdOutlineChangeCircle } from 'react-icons/md'
 import Modals from "../utils/Modals"
@@ -46,6 +47,10 @@ const Setup = (props) => {
 
     const handleCreateCompany = () => {
         setUpdateCoDB(true)
+    }
+
+    const handleImports=()=>{
+        console.log("handleImportd")
     }
 
     const handleCloseModal = () => {
@@ -206,13 +211,25 @@ const Setup = (props) => {
                         onClick={handleStandardAccs}
                     >
                         <div
-                            className='side_buttons_content'>
+                            className='side_buttons_content'
+                            title={allAccs?.length > 0?"Accounts exist - cannot import standard accounts, use Import"
+                            :"test"}>
                             <MdAccountBalanceWallet
                                 className='side_buttons_content_icon'
                                 size={24} />
                             <p className='system_side_buttons_content_text'>
                                 Standard set of accounts
                             </p>
+                        </div>
+                    </button>
+                    <button
+                        className='system_side_buttons'
+                        onClick={handleImports}>
+                        <div className='side_buttons_content'>
+                            <AiOutlineImport
+                                size={20} />
+                            <p className='system_side_buttons_content_text'>
+                                Import</p>
                         </div>
                     </button>
                     <button

@@ -19,7 +19,6 @@ export function AuthProvider({ children }) {
     // };
 
     function logout() {
-        console.log("tedtestZ this is logout")
         // Implement your logout logic here
         setAuthenticated(false);
     };

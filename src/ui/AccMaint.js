@@ -47,8 +47,7 @@ const AccMaint = (props) => {
         return () => {
         }
     }, [])
-    useEffect(() => {
-    }, [])
+    
     const handleCreate = () => {
         setAccCreate(true)
     }
@@ -59,7 +58,6 @@ const AccMaint = (props) => {
         setDeleteConfirm(false)
     }
     const deleteSelectedAccounts = async () => {
-
         for (let i = 0; i < allAccs?.length; i++) {
             if (checkedAccs.includes(allAccs[i].id)) {
                 const theAccNum = allAccs[i].number;
@@ -98,28 +96,12 @@ const AccMaint = (props) => {
         setAccEdit(false)
     }
 
-    const containerStyle = {
-        gridTemplateColumns: "repeat(6, 8.2rem)",
-        '@media (maxWidth: 1100px)': {
-            gridTemplateColumns: "repeat(4, 8.2rem)",
-            backgroundColor: "red"
-        },
-    };
-
     return (
         <div
             className='work_container'
             style={{
-                // height: "100%",
-                // width: "100%",
                 backgroundColor: "lightgray"
             }}>
-            {/* style={{
-                height: "100%",
-                width: "100%",
-                backgroundColor: "lightgray"
-            }}> */}
-
             {(accCreate || accEdit) && (
                 <Modals
                     title={allAccs[checkedAccs[0] - 1] ? "Edit Account" : "Create Account"}
@@ -206,17 +188,17 @@ const AccMaint = (props) => {
                     marginTop: "0px"
                 }}>
                     Account Maintenance</h2>
-                {allAccs &&
-                    <CheckboxTable
+                {allAccs?.length>0
+                ?<CheckboxTable
                         checkAccs={(chkdArr) => setCheckedAccs(chkdArr)}
-                        checkboxData={allAccs} />
+                        checkboxData={allAccs}/>
+                        : <p>No records found</p>
                 }
                 {stdAccs && <NutsofSetup
                     close={() => setStdAccs(false)} />
                 }
                 <div className='container'>
-                    <div className='button_grid'
-                        style={containerStyle}>
+                    <div className='button_grid'>
                         <button
                             className='main_buttons'
                             onClick={handleCreate}>

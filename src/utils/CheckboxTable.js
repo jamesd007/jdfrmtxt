@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/checkbox.css'
+import "../styles/checkbox.css"
 
 const CheckboxTable = ({ checkboxData, ...props }) => {
+    console.log("tedtestCHECKBOXTABLE checkboxdata=",checkboxData)
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
 
     const handleCheckboxChange = (event, id) => {
         const isChecked = event.target.checked;
-
         if (isChecked) {
             setSelectedCheckboxes(prevState => [...prevState, id]);
         } else {
@@ -30,25 +31,46 @@ const CheckboxTable = ({ checkboxData, ...props }) => {
     }, [selectedCheckboxes])
 
     return (
-        <div>
-            <table>
+        <div className="table-container">
+            <table >
                 <thead>
-                    <tr>
+                    <tr className='header-row'>
+                        <th></th>
                         <th>Number</th>
                         <th>Account Name</th>
                         <th>Class</th>
                         <th>Category</th>
-                        <th>Standard Amount</th>
+                        <th
+                        className='tooltip'
+                        data-tooltip="Tooltip for Standard Amount">Std Amt</th>
                     </tr>
                 </thead>
+                 <label
+                    className="checkbox-row">
+                    <input
+                        type="checkbox"
+                        checked={selectedCheckboxes.length === checkboxData.length}
+                        onChange={handleSelectAll}
+                    />
+                    Select All
+                </label>
                 <tbody>
                     {checkboxData.map((item, index) => (
-                        <tr key={index}>
-                            <td>{item.number}</td>
+                        <tr key={index} className="checkbox-row">
+                            <input 
+                                    type="checkbox"
+                                    checked={selectedCheckboxes.includes(item.id)}
+                                    onChange={e => handleCheckboxChange(e, item.id)} />
+                                    <span className="ellipsis">{item.number}</span>
+                                    <span className="ellipsis">{item.name}</span>
+                                    <span className="ellipsis">{item.class}</span>
+                                    <span className="ellipsis">{item.category}</span>
+                                    <span className="ellipsis_right">{item.stdAmt}</span>
+                            {/* <td>{item.number}</td>
                             <td>{item.name}</td>
                             <td>{item.class}</td>
                             <td>{item.category}</td>
-                            <td>{item.stdAmt}</td>
+                            <td>{item.stdAmt}</td> */}
                         </tr>
                     ))}
                 </tbody>

@@ -17,7 +17,6 @@ function Login(props) {
     const currentUser = useCurrentUser()
 
     const handleLogout = () => {
-        console.log("tedtestZ handleLogout logging out or not in login")
         // Call the logout function to clear the user's session
         setShowLogin(true)
         setShowModal(true)
@@ -25,11 +24,6 @@ function Login(props) {
         setProceedLogin(false)
         console.log("Logout");
     };
-
-    useEffect(() => {
-        console.log("tedtestZ useEffect for openCompany=", openCompany)
-        // if (openCompany) props.logged()
-    }, [openCompany])
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -46,16 +40,10 @@ function Login(props) {
     }, []);
 
     const handleLogin = () => {
-        console.log("tedtestZ handleLogin changing proceedlogin,showLogin=", showLogin)
         setProceedLogin(true)
     }
 
-    useEffect(() => {
-        console.log("tedtestZ USEEFFECT proceedlogin=", proceedLogin)
-    }, [proceedLogin])
-
     const handleResponse = (val) => {
-        console.log("tedtestZ handleResponse val=", val)
         if (val === "invalid") {
             setProceedLogin(false)
             setOpenCompany(false)
@@ -63,11 +51,8 @@ function Login(props) {
     }
 
     const handleOpenCompany = (val) => {
-        console.log("tedtestZ  handleopencompany val=", val)
-
         //this means the user has logged in successfully
         if (val.user_id) {
-            console.log("tedtestZ handleOpenCompany user has logged in")
             setCompanyObject(val)
             setShowModal(false)
             setOpenCompany(true)
@@ -92,6 +77,7 @@ function Login(props) {
         if (val === "success") {
             setShowReg(false)
             setShowLogin(true)
+            setProceedLogin(false)
             //tedtest chk for last_company, if found open it,
             //if not found chk for companies, if found ask user to select a company
             //if not found tell user to set up a company - or just go into company setup

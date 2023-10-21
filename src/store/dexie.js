@@ -28,6 +28,7 @@ async function getUsername(username) {
 }
 
 async function addAccount(accountData) {
+    console.log("tedtestA accountData=",accountData)
     return await db.accounts.add(accountData);
 }
 async function deleteAccount(accountId) {
