@@ -4,7 +4,7 @@ import Modals from '../utils/Modals'
 import LoginForm from '../forms/LoginForm';
 import RegistrationForm from '../forms/RegistrationForm';
 import Company from './Company'
-import { useCurrentUser } from '../contexts/CompanyContext'
+// import { useCurrentUser } from '../contexts/CompanyContext'
 
 function Login(props) {
     const [showModal, setShowModal] = useState(true)
@@ -14,7 +14,7 @@ function Login(props) {
     const [updateRegDB, setUpdateRegDB] = useState(false)
     const [openCompany, setOpenCompany] = useState(false)
     const [companyObject, setCompanyObject] = useState()
-    const currentUser = useCurrentUser()
+    // const currentUser = useCurrentUser()
 
     const handleLogout = () => {
         // Call the logout function to clear the user's session
@@ -51,6 +51,7 @@ function Login(props) {
     }
 
     const handleOpenCompany = (val) => {
+        console.log("tedtestA val=",val)
         //this means the user has logged in successfully
         if (val.user_id) {
             setCompanyObject(val)
@@ -133,7 +134,7 @@ function Login(props) {
                     loggingOut={handleLogout}
                     // lastCo={companyObject.last_company}
                     companies={companyObject.companies}
-                    user_id={currentUser}
+                    // user_id={currentUser}
                     companyObject={companyObject}
                 />}
         </div>

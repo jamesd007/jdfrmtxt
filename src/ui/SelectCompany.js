@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import db from '../store/dexie'
+// import db from '../store/dexie'
 import { getAllCompanies } from '../store/dexie'
-import { useCompany, useCompanyUpdate, useCurrentUser } from '../contexts/CompanyContext'
+// import { useCompany, useCompanyUpdate, useCurrentUser } from '../contexts/CompanyContext'
 
 
 const SelectCompany = (props) => {
@@ -12,9 +12,9 @@ const SelectCompany = (props) => {
     const [companiesList, setCompaniesList] = useState([]);
     const [displayListNew, setDisplayListNew] = useState([])
     const inputRef = useRef(null);
-    const companyId = useCompany()
-    const changeCompanyId = useCompanyUpdate()
-    const currentUser = useCurrentUser()
+    // const companyId = useCompcompanyid\any()
+    // const changeCompanyId = useCompanyUpdate()
+    // const currentUser = useCurrentUser()
 
     useEffect(() => {
         // Set focus when the component mounts
@@ -34,16 +34,16 @@ const SelectCompany = (props) => {
     }, [])
 
     async function goToCompany(company) {
-        const updated = await db.users.update(currentUser, { last_company: company.companyId });
-        if (updated) {
-            window.alert(`Successfully updated user database`)
-            // props.success({ status: "success", lastCo: companyId });
-            changeCompanyId(company.companyId)
-            props.close()
-        } else {
-            window.alert(`User with user_id ${currentUser} not found.`)
-        }
-        changeCompanyId(company.companyId)
+        // const updated = await db.users.update(currentUser, { last_company: company.companyId });
+        // if (updated) {
+        //     window.alert(`Successfully updated user database`)
+        //     // props.success({ status: "success", lastCo: companyId });
+        //     // changeCompanyId(company.companyId)
+        //     props.close()
+        // } else {
+        //     window.alert(`User with user_id ${currentUser} not found.`)
+        // }
+        // changeCompanyId(company.companyId)
     }
 
     useEffect(() => {

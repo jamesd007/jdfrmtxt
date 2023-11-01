@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Modals from '../utils/Modals'
 import CompanyForm from '../forms/CompanyForm'
-import db from '../store/dexie'
+// import db from '../store/dexie'
 import MainProgram from './MainProgram'
-import { useCompany, useCompanyUpdate, useCurrentUser, useCurrentUserUpdate } from '../contexts/CompanyContext'
+import { activeDB, updateActiveDB,} from '../contexts/CompanyContext'
 import {FiLogOut}from 'react-icons/fi'
 import { TiThMenu } from 'react-icons/ti'
 import NutsofSetup from '../utils/NutsOfSetup'
@@ -18,10 +18,10 @@ const Company = (props) => {
     const [updateCoDB, setUpdateCoDB] = useState(false)
     const [loadButtons, setLoadButtons] = useState(false)
     const [lastCompany, setLastCompany] = useState()
-    const companyId = useCompany()
-    const changeCompanyId = useCompanyUpdate()
-    const currentUser = useCurrentUser()
-    const changeUser = useCurrentUserUpdate()
+    // const companyId = useCompany()
+    // const changeCompanyId = useCompanyUpdate()
+    // const currentUser = useCurrentUser()
+    // const changeUser = useCurrentUserUpdate()
     const [accsPresent, setAccsPresent] = useState(true)
     const [loggedIn, setLoggedIn] = useState(true)
     const [companyName, setCompanyName] = useState('')
@@ -34,8 +34,8 @@ const Company = (props) => {
 const[accountsArray,setAccountsArray]=useState([])
 
     const handleLogInOut = () => {
-        changeCompanyId("")
-        changeUser("")
+        // changeCompanyId("")
+        // changeUser("")
         setLoadButtons(false)
         setLoggedIn(false)
         props.loggingOut()
@@ -58,7 +58,7 @@ goToMenu: "",
 
     async function getCompanyNameById(companyId) {
         try {
-            const companyName = await db.companies.where({ id: companyId }).first();
+            // const companyName = await db.companies.where({ id: companyId }).first();
             if (companyName) {
                 return companyName.companyName;
             } else {
@@ -70,54 +70,54 @@ goToMenu: "",
         }
     }
 
-    useEffect(() => {
-        getCompanyNameById(companyId)
-            .then(companyName => {
-                setCompanyName(companyName)
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, [companyId])
+    // useEffect(() => {
+    //     getCompanyNameById(companyId)
+    //         .then(companyName => {
+    //             setCompanyName(companyName)
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }, [companyId])
 
     useEffect(() => {
         console.log("tedtest start ue")
         if (loggedIn) {
             const getLastCo = async () => {
                 try {
-                    const lastCo = await db.companies.get(companyId);
-                    console.log("tedtest lastco=",lastCo)
-                    if (lastCo) {
-                        setLoadButtons(true)
-                        db.accounts.count().then(count => {
-                            console.log("tedtest count=",count)
-                            if (count === 0) {
-                                setAccsPresent(false)
-                            } else {
-                                setAccsPresent(true)
-                            }
-                        }).catch(error => {
-                            console.error('Error checking the "accounts" table:', error);
-                        });
-                    } else {
-                        console.log("tedtest wasn't lastco")
-                        console.log('ERROR loading last company');
-                    }
+                    // const lastCo = await db.companies.get(companyId);
+                    // console.log("tedtest lastco=",lastCo)
+                    // if (lastCo) {
+                        // setLoadButtons(true)
+                        // db.accounts.count().then(count => {
+                        //     console.log("tedtest count=",count)
+                        //     if (count === 0) {
+                        //         setAccsPresent(false)
+                        //     } else {
+                        //         setAccsPresent(true)
+                        //     }
+                        // }).catch(error => {
+                        //     console.error('Error checking the "accounts" table:', error);
+                        // });
+                    // } else {
+                    //     console.log("tedtest wasn't lastco")
+                    //     console.log('ERROR loading last company');
+                    // }
                 } catch (error) {
                     console.error('ERROR Error fetching company:', error);
                 }
             }
-            if (companyId) {
-                getLastCo()
-            }
-            else if (props.companies) {
-                //TODO finsh this
-            }
-            else {
-                setDispCoForm(true)
-            }
+            // if (companyId) {
+            //     getLastCo()
+            // }
+            // else if (props.companies) {
+            //     //TODO finsh this
+            // }
+            // else {
+            //     setDispCoForm(true)
+            // }
         }
-    }, [companyId])
+    }, [])
 
     const handleCloseModal = () => {
         setDispCoForm(false)
@@ -140,7 +140,7 @@ goToMenu: "",
         if (val.lastCo) {
             // setLastCompany(val.lastCo)
             // setLastCompany()
-            changeCompanyId(val.lastCo)
+            // changeCompanyId(val.lastCo)
         }
         if (val.status === "success") {
             setDispCoForm(false)
@@ -212,7 +212,7 @@ coords={coords}
                         </div>
                     }>
                     <CompanyForm
-                        user={currentUser}
+                        // user={currentUser}
                         // user={props.user_id}
                         updateDatabase={updateCoDB}
                         success={(val) => handleSuccess(val)} />
@@ -284,7 +284,7 @@ coords={coords}
             {loadButtons &&
                 <MainProgram
                     origin={props.origin}
-                    user_id={currentUser}
+                    // user_id={currentUser}
                     // user_id={props.user_id}
                     lastCo={lastCompany}
                 // props.lastCo

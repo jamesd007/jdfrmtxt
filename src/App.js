@@ -2,12 +2,13 @@ import React from 'react';
 import './App.css';
 import Login from './ui/Login';
 import { CompanyProvider } from './contexts/CompanyContext'
+import { ActiveDBProvider } from './contexts/CompanyContext';
 
 function App() {
 
   return (
     <div className="App">
-      <CompanyProvider
+      <ActiveDBProvider
         value={""}
       >
         {/* <div
@@ -23,7 +24,7 @@ function App() {
         < p className='main_title'>
           ACCOUNTS</p>
         <Login />
-      </CompanyProvider>
+      </ActiveDBProvider>
     </div>
   );
 }

@@ -13,8 +13,8 @@ import Reports from './Reports'
 import Budget from './Budget'
 import FileTransfer from './FileTransfer'
 import Setup from './Setup'
-import db from '../store/dexie'
-import { useCompany, useCurrentUser } from '../contexts/CompanyContext'
+// import db from '../store/dexie'
+import { activeDB, updateActiveDB} from '../contexts/CompanyContext'
 
 const MainProgram = (props) => {
     const [openAcc, setOpenAcc] = useState(false)
@@ -27,13 +27,13 @@ const MainProgram = (props) => {
     const [openFileTransfer, setOpenFileTransfer] = useState(false)
     const [companyName, setCompanyName] = useState('')
     const [userName, setUserName] = useState('')
-    const currentCompany = useCompany()
+    // const currentCompany = useCompany()
     // const currentCompanyChange = useCompanyUpdate()
-    const currentUser = useCurrentUser()
+    // const currentUser = useCurrentUser()
 
     async function getCompanyNameById(companyId) {
         try {
-            const companyName = await db.companies.where({ id: companyId }).first();
+            // const companyName = await db.companies.where({ id: companyId }).first();
             if (companyName) {
                 return companyName.companyName;
             } else {
@@ -47,7 +47,7 @@ const MainProgram = (props) => {
 
     async function getUserNameById(userId) {
         try {
-            const userName = await db.users.where({ id: userId }).first();
+            // const userName = await db.users.where({ id: userId }).first();
 
             if (userName) {
                 return userName.username;
@@ -70,27 +70,27 @@ const MainProgram = (props) => {
     //             console.error(error);
     //         });
     // }, [props.lastCo, props])
-    useEffect(() => {
-        getCompanyNameById(currentCompany)
-            .then(companyName => {
-                setCompanyName(companyName)
-                console.log('Company Name:', companyName);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, [currentCompany])
+    // useEffect(() => {
+    //     getCompanyNameById(currentCompany)
+    //         .then(companyName => {
+    //             setCompanyName(companyName)
+    //             console.log('Company Name:', companyName);
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }, [currentCompany])
 
-    useEffect(() => {
-        getUserNameById(currentUser)
-            .then(UserName => {
-                setUserName(UserName)
-                console.log('User Name:', UserName);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, [currentUser])
+    // useEffect(() => {
+    //     getUserNameById(currentUser)
+    //         .then(UserName => {
+    //             setUserName(UserName)
+    //             console.log('User Name:', UserName);
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }, [currentUser])
 
     const handleAccMaint = () => {
         if (openTransactions) setOpenTransactions(false)

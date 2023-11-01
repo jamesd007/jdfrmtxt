@@ -1,18 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
-import db from '../store/dexie'
+// import db from '../store/dexie'
+import {getUsername}from '../store/dexie'
 import '../styles/login.css'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { useCompany, useCompanyUpdate, useCurrentUser, useCurrentUserUpdate } from '../contexts/CompanyContext'
+import { useActiveDB, updateActiveDB} from '../contexts/CompanyContext'
+  // useCurrentUser, useCurrentUserUpdate } from '../contexts/CompanyContext'
 
 function LoginForm(props) {
   const [username, setUsername] = useState('');
+  const [user,setUser] = useState('');
+
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
   const inputRef = useRef(null);
-  const currentUser = useCompany()
-  const changeUser = useCurrentUserUpdate()
-  const companyId = useCompany()
-  const changeCompanyId = useCompanyUpdate()
+  // const currentUser = useCompany()
+  // const changeUser = useCurrentUserUpdate()
+  // const companyId = useCompany()
+  // const changeCompanyId = useCompanyUpdate()
 
   useEffect(() => {
     // Set focus when the component mounts
@@ -38,13 +42,23 @@ function LoginForm(props) {
           return;
         }
         // Fetch user data from Dexie
-        const user = await db.users.where('username').equals(username).first();
+        // const username = await getUsername(activeDB, username);
+
+        // const user = await db.users.where('username').equals(username).first();
         if (user && verifyPassword(password, user.hashedPassword)) {
+          console.log("tedtestAA user.last_company=",user.last_company)
           let obj = { 'user_id': user.id, 'companies': user.companies, 'last_company': user.last_company }
           props.openCompany(obj)
-          changeUser(user.id)
-          changeCompanyId(user.last_company)
-          console.log("testedtR user changed to : ", user.id)
+          // changeActiveDB
+          // changeUser(user.id)
+          // changeCompanyId(user.last_company)
+//TEDTEST tesing begin          // Example usage:
+const activeCompany = user.last_company; // The user can specify the company name
+// addCompanyDatabase(activeCompany); // Create the database if it doesn't exist
+// switchToCompanyDatabase(activeCompany);
+//TEDTEST testing end
+
+          console.log("testedtAA user changed to : ", user.id)
           // currentCompany(user.id)
           props.response("valid")
         } else {
@@ -70,7 +84,7 @@ function LoginForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Fetch user data from Dexie
-    const user = await db.users.get(username);
+    // const user = await db.users.get(username);
   };
 
   const verifyPassword = (password, hashedPassword) => {

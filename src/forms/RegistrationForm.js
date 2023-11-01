@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import db from '../store/dexie'
+// import db from '../store/dexie'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+// Another component or file in your application
+import { createUserDatabase, addUserToUserDatabase, switchToUserDatabase } from '../store/dexie';
+
+// Usage example
+
 
 function RegistrationForm(props) {
+    console.log("tedtest props=",props)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -42,21 +48,45 @@ function RegistrationForm(props) {
             // const hashedPassword = hashPassword(password);
 
             // Save the user's details to the Dexie database
-            try {
-                await db.users.add({
-                    username: username,
-                    email: email,
-                    hashedPassword: password,
-                    companies: "",
-                    last_company: ""
-                });
-                alert('Registration successful');
+            const userId = 'uniqueUserId';//tedtest change this - also just want one temporary user database?
+// Create a user database
+const userDB = createUserDatabase(userId);
+
+// Add a user to the database
+try {
+await addUserToUserDatabase(userId, {   
+    username: username,
+    email: email,
+    hashedPassword: password,
+    companies: "",
+    last_company: ""});
+    alert('Registration successful');
                 props.success("success")
-            } catch (error) {
-                console.error('ERROR registering user:', error);
-                props.success("error" + error)
-                alert('Registration failed');
-            }
+} catch (error) {
+    console.error('ERROR registering user:', error);
+    props.success("error" + error)
+    alert('Registration failed');
+}
+
+
+// Switch to the user's database
+const activeUserDB = switchToUserDatabase(userId);
+
+            // try {
+            //     await db.users.add({
+            //         username: username,
+            //         email: email,
+            //         hashedPassword: password,
+            //         companies: "",
+            //         last_company: ""
+            //     });
+            //     alert('Registration successful');
+            //     props.success("success")
+            // } catch (error) {
+            //     console.error('ERROR registering user:', error);
+            //     props.success("error" + error)
+            //     alert('Registration failed');
+            // }
         }
         if (props.updateDatabase) updateRegDetails();
     }, [props.updateDatabase]);

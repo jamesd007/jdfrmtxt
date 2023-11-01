@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import '../styles/company.css'
-import db from '../store/dexie'
-import { useCompany, useCompanyUpdate } from '../contexts/CompanyContext'
+// import db from '../store/dexie'
+// import {updateActiveDB} from '../contexts/CompanyContext'
+// import { useCompany, useCompanyUpdate } from '../contexts/CompanyContext'
+import { useActiveDB, updateActiveDB } from '../contexts/CompanyContext'
 
 const CompanyForm = (props) => {
     const [companyName, setCompanyName] = useState('');
@@ -15,8 +17,8 @@ const CompanyForm = (props) => {
     const [taxNo, setTaxNo] = useState('');
     const [VATNo, setVATNo] = useState('');
     const inputRef = useRef(null);
-    const currentCompany = useCompany()
-    const currentCompanyChange = useCompanyUpdate()
+    // const currentCompany = useCompany()
+    // const currentCompanyChange = useCompanyUpdate()
 
 
     useEffect(() => {
@@ -44,17 +46,18 @@ const CompanyForm = (props) => {
                     taxNo,
                     VATNo
                 };
-                const companyId = await db.companies.add(newCompany);
-                // Now, update the last_company field for the user
-                const updated = await db.users.update(props.user, { last_company: companyId });
+                // const companyId = await db.companies.add(newCompany);
+                // // Now, update the last_company field for the user
+                // const updated = await db.users.update(props.user, { last_company: companyId });
 
-                if (updated) {
-                    window.alert(`Successfully created company and updated user database`)
-                    props.success({ status: "success", lastCo: companyId });
-                    currentCompanyChange(companyId)
-                } else {
-                    window.alert(`User with user_id ${props.user.id} not found.`)
-                }
+                // if (updated) {
+                //     window.alert(`Successfully created company and updated user database`)
+                //     props.success({ status: "success", lastCo: companyId });
+                //     // currentCompanyChange(companyId)
+                //     // updateActiveDB(activeDB)
+                // } else {
+                //     window.alert(`User with user_id ${props.user.id} not found.`)
+                // }
             } catch (error) {
                 console.error('ERROR creating company or updating last_company:', error);
                 props.success({ status: "error" + error, lastCo: '' });
@@ -65,7 +68,8 @@ const CompanyForm = (props) => {
         if (props.updateDatabase) {
             updateCoDetails();
         }
-    }, [props.updateDatabase, companyName, companyType, addressPhysical, props.user, companyRegNo, addressPostal, email, telephone, website, taxNo, VATNo, currentCompany]);
+    }, [props.updateDatabase, companyName, companyType, addressPhysical, props.user, companyRegNo, addressPostal, email, telephone, website, taxNo, VATNo])
+    // , currentCompany]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
